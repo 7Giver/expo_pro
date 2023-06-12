@@ -1,0 +1,162 @@
+/*页面公共样式 */
+#app,
+.content {
+	background-color: #f3f4f6;
+}
+
+.block {
+	padding: 24rpx;
+	margin-top: 24rpx;
+	border-radius: 4px;
+	background-color: #ffffff;
+	box-sizing: border-box;
+}
+
+.nodata {
+	width: 100%;
+	color: #999;
+	font-size: 28rpx;
+	text-align: center;
+	padding: 26rpx 0 18rpx;
+}
+
+.flex {
+	display: flex;
+	align-items: stretch;
+	justify-content: flex-start;
+
+	&-ac {
+		display: flex;
+		align-items: center;
+	}
+
+	&-ab {
+		display: flex;
+		align-items: baseline;
+	}
+
+	&-center {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&-cc {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+
+	&-cb {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&-ca {
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+	}
+
+	&-ce {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+
+	&-bc {
+		display: flex;
+		align-items: baseline;
+		justify-content: center;
+	}
+
+	&-bb {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+	}
+
+	&-be {
+		display: flex;
+		align-items: baseline;
+		justify-content: flex-end;
+	}
+
+	&-col {
+		display: flex;
+		align-items: stretch;
+		flex-direction: column;
+	}
+}
+
+.jend {
+	justify-content: flex-end;
+}
+
+.jbet {
+	justify-content: space-between;
+}
+
+.jaro {
+	justify-content: space-around;
+}
+
+.achina_fixed_btn {
+	position: fixed;
+	right: 30rpx;
+	bottom: 220rpx;
+	width: 110rpx;
+	height: 110rpx;
+	font-size: 28rpx;
+	text-align: center;
+	line-height: 110rpx;
+	color: #fff;
+	background: $u-primary;
+	border-radius: 50%;
+}
+
+.inset_bottom {
+	width: 100%;
+	height: calc(env(safe-area-inset-bottom) + 0px);
+}
+
+.table-wrap {
+	.table-title {
+		padding: 0 14rpx;
+		margin: 28rpx 24rpx;
+		background-color: #f1f1f1;
+		.item {
+			color: #666;
+			font-size: 26rpx;
+			line-height: 80rpx;
+		}
+	}
+	.table-content {
+		padding: 0 24rpx;
+		.item {
+			// &:nth-child(2n + 1) {
+			// 	background: #f1f1f1;
+			// }
+			padding: 16rpx 14rpx 20rpx;
+			&:not(:last-child) {
+				border-bottom: 1px solid #e1e1e1;
+			}
+			.title {
+				color: #666;
+				font-size: 30rpx;
+				// font-weight: bold;
+			}
+			.bottom {
+				color: #666;
+				font-size: 30rpx;
+				text-align: right;
+				padding-top: 20rpx;
+			}
+			.main {
+				color: $u-primary;
+			}
+		}
+	}
+}

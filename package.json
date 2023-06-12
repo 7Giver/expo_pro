@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "sass": "^1.63.3",
+    "sass-loader": "^13.3.2"
+  },
+  "dependencies": {
+    "vuex-persister": "^1.0.0"
+  }
+}
