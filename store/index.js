@@ -15,8 +15,6 @@ const store = createStore({
 	state: {
 		token: '',
 		userInfo: {},
-		customer: {}, // 销售客户
-		customerList: [], // 客户列表
 		warehouse: {}, // 销售仓库
 		warehouseList: [], // 仓库列表
 		shopCart: [], // 要货购物车
@@ -52,14 +50,6 @@ const store = createStore({
 			state.sendCart.forEach(item => (totalCash += item.salePrice * item.sendNum))
 			return uni.$u.priceFormat(totalCash, 2)
 		},
-		getCustomerList(state) {
-			let result = [[]]
-			state.customerList.forEach(item => {
-				let target = result[0]
-				target.push(item)
-			})
-			return result
-		},
 		getWarehouseColumns(state) {
 			let result = [[]]
 			state.warehouseList.forEach(item => {
@@ -85,16 +75,6 @@ const store = createStore({
 		},
 		clearUserInfo(state) {
 			state.userInfo = {}
-		},
-		setCustomer(state, data) {
-			state.customer = data ?? {}
-		},
-		setCustomerList(state, data) {
-			state.customerList = data ?? []
-		},
-		clearCustomer(state, data) {
-			state.customer = {}
-			state.customerList = []
 		},
 		setWarehouse(state, data) {
 			state.warehouse = data ?? {}
@@ -200,12 +180,33 @@ const store = createStore({
 		},
 		async wxLogin({ commit }, tel) {
 			const goSetUserInfo = async (info) => {
-				let { code, data } = await getPersonalInfo(info.userNumber)
-				if (code !== 200) return
-				let target = Object.assign(info, data)
-				commit('setUserInfo', target)
-				uni.reLaunch({ url: '/pages/data/index' })
+				// #ifdef MP-WEIXIN
+				uni.login({
+					provider: 'weixin',
+					success: event => {
+						// console.log('event', event)
+						!info.openId ? goGetSessionKey(event.code) : uni.$u.route('/pages/index/index')
+					}
+				})
+				// #endif
+				uni.$u.route('/pages/index/index')
 			}
+			// 获取openId
+			const goGetSessionKey = async (weixinCode) => {
+				const { code, data } = await getSessionKey(weixinCode)
+				if (code != 200) return
+				await goAddUserOpenId(data)
+			}
+			// openId绑定用户
+			const goAddUserOpenId = async (res) => {
+				let params = {
+					openId: res.openid,
+					userId: data.id
+				}
+				await addUserOpenId(params)
+				uni.$u.route('/pages/login/detail')
+			}
+
 			const { code, data } = await wxlogin(tel)
 			if (code !== 200) return
 			// console.log('wxLogin', data);
@@ -214,6 +215,7 @@ const store = createStore({
 				return config
 			})
 			commit('setToken', data.token)
+			commit('setUserInfo', data)
 			goSetUserInfo(data)
 		},
 		loginOut({ commit }) {

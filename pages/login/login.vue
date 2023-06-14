@@ -4,12 +4,12 @@
 		<view class="flex-cc user_wrap">
 			<u--image
 				:showLoading="true"
-				src="/static/logo.png"
+				src="/static/PDHB.jpg"
 				width="80px"
 				height="80px"
 				shape="circle"
 			></u--image>
-			<view class="nickname">经销商CRM</view>
+			<view class="nickname">鹏达海博订货系统</view>
 		</view>
 		<view class="inner-wrap" v-if="loginIndex == 1">
 			<view class="flex-ac item">
@@ -46,6 +46,7 @@
 			</view>
 		</view>
 		<view class="btn-wrap">
+			<!-- #ifdef MP-WEIXIN -->
 			<button
 				class="wx_btn"
 				type="primary"
@@ -55,6 +56,17 @@
 			>
 				一键登录
 			</button>
+			<!-- #endif -->
+			<!-- #ifdef H5 -->
+			<u-button
+				class="login_btn"
+				type="success"
+				size="large"
+				text="一键登录"
+				@click="goWxLogin"
+				v-if="loginIndex == 0"
+			></u-button>
+			<!-- #endif -->
 			<u-button
 				class="login_btn"
 				type="primary"
@@ -88,7 +100,7 @@
 import { onShow } from '@dcloudio/uni-app'
 import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import { getSystemMenu, sendLoginSms, getUserPhoneNumber } from '@/config/api.js'
+import { getUserPhoneNumber } from '@/config/api.js'
 import AzFooter from '@/components/azFooter/azFooter.vue'
 
 onShow(() => {
@@ -198,14 +210,16 @@ const goLogin = () => {
 // 一键登录
 const goWxLogin = async e => {
 	// #ifdef MP-WEIXIN
-	// console.log('goWxLogin', e.detail)
+	console.log('goWxLogin', e.detail)
 	const js_code = e.detail.code
 	const { code, data } = await getUserPhoneNumber(js_code)
 	if (code !== 200) return
 	store.dispatch('wxLogin', data.phoneNumber)
+	// store.dispatch('wxLogin', 13023367790)
 	// #endif
 	// #ifdef H5
-	console.log('请使用小程序打开')
+	// console.log('请使用小程序打开')
+	store.dispatch('wxLogin', 13023367790)
 	// #endif
 }
 </script>
@@ -271,7 +285,7 @@ const goWxLogin = async e => {
 		margin: 0 auto 60rpx;
 	}
 	.login_btn {
-		height: 80rpx;
+		height: 95rpx;
 	}
 }
 .bottom-wrap {

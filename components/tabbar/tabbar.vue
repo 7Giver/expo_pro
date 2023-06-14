@@ -23,23 +23,23 @@ const tabbarList = [
 	{
 		name: '首页',
 		icon: 'home',
-		path: '/pages/data/index'
+		path: '/pages/index/index'
 	},
 	{
-		name: '要货单',
+		name: '订货',
 		icon: 'grid',
 		path: '/pages/purchase/purchase'
 	},
-	{
-		name: '收货单',
-		icon: 'shopping-cart',
-		path: '/pages/receipt/receipt'
-	},
-	{
-		name: '库存管理',
-		icon: 'list-dot',
-		path: '/pages/store/store'
-	},
+	// {
+	// 	name: '收货单',
+	// 	icon: 'shopping-cart',
+	// 	path: '/pages/receipt/receipt'
+	// },
+	// {
+	// 	name: '库存管理',
+	// 	icon: 'list-dot',
+	// 	path: '/pages/store/store'
+	// },
 	{
 		name: '我的',
 		icon: 'account',

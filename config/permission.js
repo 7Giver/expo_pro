@@ -1,9 +1,7 @@
 const whiteList = [
-	// '/', // 注意入口页必须直接写 '/'
-	'/pages/data/index',
-	'/pages/index/index',
-	'/pages/login/login'
-	// '/pages/user/user'
+	'/', // 注意入口页必须直接写 '/'
+	'/pages/login/login',
+	'/pages/login/detail',
 ]
 
 function hasPermission(url) {
